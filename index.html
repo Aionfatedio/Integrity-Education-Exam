@@ -9,6 +9,7 @@
 <body>
     <div class="container">
         <h1>廉洁教育答题</h1>
+        <h3>Version 0.1</h3>
         <div class="progress-bar"><div class="progress" id="progress"></div></div>
         <div class="timer" id="timer">答题时间：00:00</div>
         <div class="question-nav" id="questionNav"></div>
@@ -19,9 +20,6 @@
             <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">下一题</button>
         </div>
         <div class="results" id="results"></div>
-        <footer>
-            Powered by 执笔画江南.
-        </footer>
     </div>
 
     <div class="modal" id="quizModal">
@@ -32,11 +30,9 @@
             <label>判断题（10的倍数，最大为60）：<input type="number" id="trueFalseCount" min="0" step="10" max="${questionBank.trueFalse.length}"></label>
             <label>简答题（正整数，最大为15）：<input type="number" id="shortAnswerCount" min="0" max="${questionBank.shortAnswer.length}"></label>
             <button class="btn btn-primary" onclick="startQuizWithCounts()">确定</button>
+            <h2>Powered by <a href="https://qm.qq.com/q/WJ5Sr7tyuc">执笔画江南</a></h2>
         </div>
     </div>
-    <footer>
-        Powered by 执笔画江南.
-    </footer>
     <script src="exam.js"></script>
 </body>
 </html>
