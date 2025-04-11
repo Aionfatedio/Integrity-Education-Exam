@@ -6,6 +6,6 @@
 > 最后一题的交卷按钮点击存在bug，请你点击其他题目再返回.
 
 > [!TIP]
-> **Please visit it at [DEMO](https://aionfatedio.github.io/Integrity-Education-Exam/)**
+> ### **Please visit it at [DEMO](https://aionfatedio.github.io/Integrity-Education-Exam/)**
 
 
