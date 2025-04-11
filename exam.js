@@ -1293,7 +1293,6 @@ function renderQuestion() {
 
     questionDiv.innerHTML = html;
 
-    // 设置按钮状态
     const answeredCount = userAnswers.filter(ans => ans && (Array.isArray(ans) ? ans.length > 0 : ans)).length;
     if (currentQuestionIndex === currentQuestions.length - 1) {
         nextBtn.textContent = '交卷';
@@ -1329,7 +1328,6 @@ function saveAnswer() {
     renderQuestionNav();
     updateProgress();
 
-    // 实时更新交卷按钮状态
     const answeredCount = userAnswers.filter(ans => ans && (Array.isArray(ans) ? ans.length > 0 : ans)).length;
     const nextBtn = document.getElementById('nextBtn');
     if (currentQuestionIndex === currentQuestions.length - 1) {
@@ -1467,5 +1465,4 @@ function restartQuiz() {
     showModal();
 }
 
-// 页面加载时显示选择框
 window.onload = showModal;
