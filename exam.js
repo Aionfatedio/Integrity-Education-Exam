@@ -21,8 +21,7 @@ toastDetails = {
 },
 removeToast = (toast) =>{
   toast.classList.add('hide')
-  if( toast.timeoutId) clearTimeout(toast.timeoutId) // 清楚setTimeout
-  // 移除li元素
+  if( toast.timeoutId) clearTimeout(toast.timeoutId) 
   setTimeout(() => {
     toast.remove()
   },500)
@@ -32,15 +31,14 @@ removeToast = (toast) =>{
 
 const createToast = (id) => {
  const {icon, text} = toastDetails[id]
- const toast = document.createElement('li') // 创建li元素
- toast.className = `toast ${id}` // 为li元素新增样式
+ const toast = document.createElement('li')
+ toast.className = `toast ${id}` 
  toast.innerHTML = `<div class="column">
  <i class="fa-solid ${icon}"></i>
  <span>${text}</span>
 </div>
 <i class="fa-solid fa-xmark" onClick="removeToast(this.parentElement)"></i>`
-  notifications.appendChild(toast) // 添加元素到 notifications ul
-  // 5秒后 隐藏toast
+  notifications.appendChild(toast)
   toast.timeoutId = setTimeout(()=> removeToast(toast), toastDetails.timer)
 }
 
@@ -1343,7 +1341,6 @@ function renderQuestion() {
 
     questionDiv.innerHTML = html;
 
-    // 实时绑定事件，确保答案保存
     if (q.type === 'shortAnswer') {
         const textarea = document.getElementById('shortAnswerInput');
         if (textarea) {
@@ -1356,7 +1353,6 @@ function renderQuestion() {
         });
     }
 
-    // 初始化按钮状态
     updateButtonState();
 }
 
@@ -1528,5 +1524,4 @@ function restartQuiz() {
     showModal();
 }
 
-// 页面加载时显示选择框
 window.onload = showModal;
