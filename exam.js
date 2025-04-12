@@ -1,3 +1,53 @@
+const notifications = document.querySelector('.notifications'),
+buttons = document.querySelectorAll('#info'),
+toastDetails = {
+  timer: 5000,
+  success:{
+    icon: 'fa-circle-check',
+    text: 'Success: This is a success toast.'
+  },
+  error:{
+    icon: 'fa-circle-xmark',
+    text: 'Error: This is a error toast.'
+  },
+  warning:{
+    icon: 'fa-circle-exclamation',
+    text: 'Warning: This is a warning toast.'
+  },
+  info:{
+    icon: 'fa-circle-info',
+    text: 'Version: 1.0.0<br>Powered by <a href="https://github.com/Aionfatedio">执笔画江南</a>'
+  }
+},
+removeToast = (toast) =>{
+  toast.classList.add('hide')
+  if( toast.timeoutId) clearTimeout(toast.timeoutId) // 清楚setTimeout
+  // 移除li元素
+  setTimeout(() => {
+    toast.remove()
+  },500)
+
+}
+
+
+const createToast = (id) => {
+ const {icon, text} = toastDetails[id]
+ const toast = document.createElement('li') // 创建li元素
+ toast.className = `toast ${id}` // 为li元素新增样式
+ toast.innerHTML = `<div class="column">
+ <i class="fa-solid ${icon}"></i>
+ <span>${text}</span>
+</div>
+<i class="fa-solid fa-xmark" onClick="removeToast(this.parentElement)"></i>`
+  notifications.appendChild(toast) // 添加元素到 notifications ul
+  // 5秒后 隐藏toast
+  toast.timeoutId = setTimeout(()=> removeToast(toast), toastDetails.timer)
+}
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => createToast(btn.id))
+})
+
 const questionBank = {
     single: [
     {
@@ -1293,6 +1343,7 @@ function renderQuestion() {
 
     questionDiv.innerHTML = html;
 
+    // 设置按钮状态
     const answeredCount = userAnswers.filter(ans => ans && (Array.isArray(ans) ? ans.length > 0 : ans)).length;
     if (currentQuestionIndex === currentQuestions.length - 1) {
         nextBtn.textContent = '交卷';
@@ -1328,6 +1379,7 @@ function saveAnswer() {
     renderQuestionNav();
     updateProgress();
 
+    // 实时更新交卷按钮状态
     const answeredCount = userAnswers.filter(ans => ans && (Array.isArray(ans) ? ans.length > 0 : ans)).length;
     const nextBtn = document.getElementById('nextBtn');
     if (currentQuestionIndex === currentQuestions.length - 1) {
@@ -1465,4 +1517,5 @@ function restartQuiz() {
     showModal();
 }
 
+// 页面加载时显示选择框
 window.onload = showModal;
