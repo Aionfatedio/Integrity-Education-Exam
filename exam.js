@@ -1457,18 +1457,27 @@ function showResults() {
     currentQuestions.forEach((q, index) => {
         const userAnswer = userAnswers[index];
         let isCorrect = false;
+        let userAnswerDisplay = userAnswer;
+        let correctAnswerDisplay = q.answer;
 
         if (q.type === 'shortAnswer') {
-            isCorrect = true;
+            isCorrect = true; 
+            userAnswerDisplay = userAnswer || '未作答';
         } else if (q.type === 'multiple') {
             const userSet = new Set(userAnswer || []);
             const correctSet = new Set(q.answer);
             isCorrect = userSet.size === correctSet.size && [...userSet].every(val => correctSet.has(val));
-            if (userSet.size > 0 && userSet.size <= correctSet.size && [...userSet].every(val => correctSet.has(val))) {
-                isCorrect = true;
-            }
+            userAnswerDisplay = userAnswer ? userAnswer.join(', ') : '未作答';
+            correctAnswerDisplay = q.answer.join(', ');
+        } else if (q.type === 'trueFalse') {
+            const userAnswerText = userAnswer && userAnswer[0] === 'A' ? '正确' : userAnswer && userAnswer[0] === 'B' ? '错误' : null;
+            isCorrect = userAnswerText === q.answer;
+            userAnswerDisplay = userAnswerText || '未作答';
+            correctAnswerDisplay = q.answer;
         } else {
             isCorrect = userAnswer && userAnswer[0] === q.answer;
+            userAnswerDisplay = userAnswer ? userAnswer[0] : '未作答';
+            correctAnswerDisplay = q.answer;
         }
 
         if (isCorrect) correctCount++;
@@ -1476,8 +1485,8 @@ function showResults() {
         html += `
             <div class="result-item ${isCorrect ? 'correct' : 'incorrect'}">
                 <p>${index + 1}. ${q.question}</p>
-                <p>你的答案：${userAnswer ? (q.type === 'shortAnswer' ? userAnswer : userAnswer.join(', ')) : '未作答'}</p>
-                <p>正确答案：${q.type === 'shortAnswer' || q.type === 'single' || q.type === 'trueFalse' ? q.answer : q.answer.join(', ')}</p>
+                <p>你的答案：${userAnswerDisplay}</p>
+                <p>正确答案：${correctAnswerDisplay}</p>
                 ${q.explanation ? `<p>解析：${q.explanation}</p>` : ''}
             </div>
         `;
