@@ -16,7 +16,7 @@ toastDetails = {
   },
   info:{
     icon: 'fa-circle-info',
-    text: 'Version: 1.0.0<br>Powered by <a href="https://github.com/Aionfatedio">执笔画江南</a>'
+    text: ' Version: 1.0.0<br>Powered by <a href="https://github.com/Aionfatedio">执笔画江南</a>'
   }
 },
 removeToast = (toast) =>{
